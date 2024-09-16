@@ -4,22 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Band Info</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="./static/style.css">
 </head>
 <body>
     <div class="container">
         <h1>Bands and Artists</h1>
-
         <div class="card-grid">
             {{range .}}
             <div class="card" onclick="toggleDetails(this)">
                 <img src="{{.Image}}" alt="{{.Name}}">
                 <div class="summary">{{.Name}}</div>
                 <div class="details">
-                    <p>Creation Date: {{.CreationDate}}</p>
-                    <p>First Album: {{.FirstAlbum}}</p>
-                    <p>Members: {{len .Members}} members</p>
-                    <p class="members">Members: {{range .Members}}{{.}}, {{end}}</p>
                 </div>
             </div>
             {{end}}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker Artists</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background: #333;
+            color: #fff;
+        }
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        img {
+            max-width: 100px;
+            border-radius: 8px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card img {
+            max-width: 150px;
+            float: left;
+            margin-right: 15px;
+        }
+        .card h2 {
+            margin: 0 0 10px;
+        }
+        .card p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Groupie Tracker Artists</h1>
+    </header>
+    <div class="container">
+        {{range .}} <!-- Loop through the artists -->
+        <div class="card">
+            <img src="{{.Info.ImageUrl}}" alt="{{.Info.Name}}">
+            <h2>{{.Info.Name}}</h2>
+            <!-- <p><strong>ID:</strong> {{.Info.ID}}</p> -->
+            <p><strong>Members:</strong> {{range .Info.Members}}{{.}}<br>{{end}}</p>
+            <p><strong>Creation Date:</strong> {{.Info.CreationDate}}</p>
+            <p><strong>First Album:</strong> {{.Info.FirstAlbum}}</p>
+            <p><strong>Dates & Locations:</strong></p>
+            <ul>
+                {{range $location, $dates := .ExtraInfo.Relation}}
+                    <li><strong>{{$location}}:</strong> {{range $dates}}{{.}}, {{end}}</li>
+                {{end}}
+            </ul>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>
